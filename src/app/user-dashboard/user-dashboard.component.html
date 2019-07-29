@@ -1,0 +1,53 @@
+<div class="container top-margin card bg-light mb-3">
+  <div>
+    <h1 style="margin:10px;">Welcome {{user.username}} 
+      <form (submit)="onLogout($event)"><button type="submit" class="btn btn-primary"  style="float: right; margin:10px;" *ngIf="isLogout">Logout</button>
+      </form>
+    </h1>
+  </div>
+  <br>
+  <hr class="hr-col"/>
+  <br>
+  <div class="row">
+    <div class="col">
+      <h1>User Details</h1>
+      <hr>
+      <div class="card bg-light mb-3" style="max-width: 18rem;">
+        <div class="card-header">{{ user.username }}</div>
+          <div class="card-body">
+            <img src='../../assets/images/img_avatar.PNG' class="img-card">
+            <br>
+            <h5>Name: {{ user.name }}</h5>
+            <h5>Email: {{ user.email }}</h5>
+            <hr>
+            <h5 class="card-title">Address: {{ user.address.street }},<br>
+                                    Suite:   {{ user.address.suite }},<br>
+                                    City:    {{ user.address.city }},<br>     
+                                    Zip:     {{ user.address.zipcode }},<br>     
+                                    Geo-Lat: {{ user.address.geo.lat }},<br>     
+                                    Geo-Lng: {{ user.address.geo.lng }}<br>     
+            </h5>
+            <hr>
+            <h5 class="card-title">Phone: {{ user.phone }}</h5>
+            <h5 class="card-title">Website: {{ user.website }}</h5>
+            <hr>
+            <h5 class="card-title">Company: {{ user.company.name }}<br>
+                                    Phrase:  {{ user.company.catchPhrase }}<br>
+                                    BS:      {{ user.company.bs }}<br>
+            </h5>
+          </div>
+        </div>                      
+      </div>
+      <div class="col">
+        <h1>Todo List</h1>
+        <hr>
+        <div class="card bg-light mb-3" style="max-width: 18rem;" *ngFor = "let list of lists; let i = index">
+          <div class="card-header">My Task {{ i + 1 }}</div>
+            <div class="card-body">
+              <h5 class="card-title">{{list.title}}</h5>      
+            </div>
+            <br>
+          </div>
+        </div>
+    </div>
+  </div>
