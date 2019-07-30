@@ -33,6 +33,7 @@ export class LoginFormComponent {
       for(var i=0; i<data.length; i++){
         if(data[i].username === username && password === this.defaultPass){
           this._userStatus.logStatusChange(true);
+          this.status = true;
           this.user = data[i];
           this.router.navigate(['/dashboard'],this.user);
           break;
@@ -43,7 +44,7 @@ export class LoginFormComponent {
       }
     }).catch((error: any) => console.log(error)) ;
 
-    if(this.status)
+    if(!this.status)
       alert('User does not exist')
   }
 
