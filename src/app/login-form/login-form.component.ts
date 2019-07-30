@@ -21,8 +21,7 @@ export class LoginFormComponent {
 
   constructor(private _fetchData: FetchDataService,
               private router: Router, 
-              private _userStatus: UserStatusService,
-              private _navBar: NavbarComponent) { }
+              private _userStatus: UserStatusService,) { }
 
   onSubmit(event:any){
     event.preventDefault();
@@ -33,6 +32,7 @@ export class LoginFormComponent {
       for(var i=0; i<data.length; i++){
         if(data[i].username === username && password === this.defaultPass){
           this._userStatus.logStatusChange(true);
+          this.status = true;
           this.user = data[i];
           this.router.navigate(['/dashboard'],this.user);
           break;
@@ -41,11 +41,15 @@ export class LoginFormComponent {
           this.status = false;
         }
       }
-    }).catch((error: any) => console.log(error)) ;
-
-    if(this.status)
-      alert('User does not exist')
+    }).then(error =>{
+      if(!this.status)
+        window.alert("User does not exist");
+    })
+    .catch(error=>{
+      console.log(error)
+    })
   }
+}
 
 
   /*async onSubmit(event:any){
@@ -68,4 +72,4 @@ export class LoginFormComponent {
     }
     return this.str;
   }*/
-}
+
