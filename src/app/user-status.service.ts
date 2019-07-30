@@ -5,10 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class UserStatusService {
 
-    isLoggedIn: boolean;
+    public isLoggedIn = false;
     
     logStatusChange(status: boolean){
         this.isLoggedIn = status;
-        return this.isLoggedIn;
     }
 }

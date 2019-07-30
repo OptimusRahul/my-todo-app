@@ -1,15 +1,15 @@
-<nav class="navbar fixed-top navbar-default navbar-expand-lg transparent navbar-inverse">
+<nav class="navbar fixed-top navbar-default navbar-expand-lg transparent navbar-inverse ">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div id="navbarNavDropdown" class="navbar-collapse collapse">
-        <ul class="navbar-nav mr-auto" *ngIf="!this.isButtonVisible">
+        <ul class="navbar-nav mr-auto" *ngIf="this.isButtonVisible == false">
             <li class="nav-item active">
                 <a class="nav-link" routerLink="/home">Home <span class="sr-only">(current)</span></a>
             </li>
         </ul>
-        <ul class="navbar-nav" *ngIf="isButtonVisible">
-            <h3>Hello {{ user }}</h3>
+        <ul class="navbar-nav" *ngIf="this.isButtonVisible == true">
+            <h3>Hello user</h3>
             <li class="nav-item dropdown">
                 <input type="image" img src="../../assets/images/img_avatar.PNG" alt="Avatar" class="card nav-bar-right"> 
             </li>            

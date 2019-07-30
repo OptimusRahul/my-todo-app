@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FetchDataService } from '../fetch-data.service';
 import { Router } from '@angular/router';
 import { UserStatusService } from '../user-status.service';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -22,8 +21,7 @@ export class UserDashboardComponent implements OnInit {
   ngOnInit() {
     this._logout.logStatusChange(true);
     this.islogout = this._logout.isLoggedIn;
-    console.log(this.islogout+' '+typeof this.islogout);
-    this._fetchData.getTodoList().subscribe(data => {
+    this._fetchData.getTodoList().then(data => {
      let id=this.user.id;
      if(data.length !== 0) this.islogout = true;
      for(var i=0; i<data.length; i++){
@@ -37,9 +35,8 @@ export class UserDashboardComponent implements OnInit {
 
   onLogout(event:any){
     event.preventDefault();
-    console.log('asd'+this._logout.isLoggedIn)
-    if(this._logout.isLoggedIn){
-      this.router.navigate(['/home']);
-    }
+    this._logout.logStatusChange(false);
+    this.router.navigate(['/home']);
+
   }
 }

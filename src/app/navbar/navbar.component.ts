@@ -11,7 +11,9 @@ export class NavbarComponent implements OnInit {
   
   isButtonVisible=false;
 
-  constructor(private _status:UserStatusService) {}
+  constructor(private _status:UserStatusService) {
+    this.isButtonVisible = this._status.isLoggedIn;
+  }
   
   ngOnInit() { 
     this.isButtonVisible = this._status.isLoggedIn;
