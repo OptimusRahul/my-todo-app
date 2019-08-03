@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { UserDetails } from './UserInterface'
-import { Todo } from './TodoInterface';
 
 const API_URL = 'https://jsonplaceholder.typicode.com';
 const urlUserPath = '/users';

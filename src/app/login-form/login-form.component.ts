@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserStatusService } from '../user-status.service';
-import { NavbarComponent } from '../navbar/navbar.component';
 import { FetchDataService } from '../fetch-data.service';
 
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css'],
-  providers: [UserStatusService, NavbarComponent]
 })
 
 export class LoginFormComponent {  
@@ -18,10 +15,13 @@ export class LoginFormComponent {
   defaultPass = "todoapp";
   status : Boolean;
   userId : number;
+  dataSource: any;
+  cookieValue= 'UNKNOWN';
 
-  constructor(private _fetchData: FetchDataService,
-              private router: Router, 
-              private _userStatus: UserStatusService,) { }
+  constructor(private _fetchData: FetchDataService, private router: Router) { }
+
+  ngOnInit(): void {    
+  }
 
   onSubmit(event:any){
     event.preventDefault();
@@ -31,10 +31,11 @@ export class LoginFormComponent {
     this._fetchData.getUserList().then(data => {    
       for(var i=0; i<data.length; i++){
         if(data[i].username === username && password === this.defaultPass){
-          this._userStatus.logStatusChange(true);
           this.status = true;
           this.user = data[i];
-          this.router.navigate(['/dashboard'],this.user);
+          this.dataSource = 'asdf';      
+          localStorage.setItem('user', JSON.stringify(this.user))   
+          this.router.navigate(['/dashboard']);
           break;
         }
         else{
@@ -43,7 +44,7 @@ export class LoginFormComponent {
       }
     }).then(error =>{
       if(!this.status)
-        window.alert("User does not exist");
+        window.alert("User does not exist: "+error);
     })
     .catch(error=>{
       console.log(error)
